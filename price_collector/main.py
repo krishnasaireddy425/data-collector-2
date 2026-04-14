@@ -35,7 +35,7 @@ CLOB_API = "https://clob.polymarket.com"
 CLOB_WS = "wss://ws-subscriptions-clob.polymarket.com/ws/market"
 CHAINLINK_WS = "wss://ws-live-data.polymarket.com"
 CHAINLINK_PING_INTERVAL = 4  # seconds
-BOOK_DEPTH = 5  # top-N levels to record per side
+BOOK_DEPTH = 2  # top-N levels to record per side (p1 + p2 with sizes)
 
 # Per-market config.
 # - name:          short label used in CSV dir and log prefix
