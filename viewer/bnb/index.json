@@ -1,8 +1,20 @@
 {
   "market": "bnb",
-  "generated_at": "2026-04-14T11:10:11.400683+00:00",
-  "count": 14,
+  "generated_at": "2026-04-14T11:25:11.311054+00:00",
+  "count": 16,
   "windows": [
+    {
+      "slug": "bnb-updown-5m-1776165600",
+      "filename": "bnb-updown-5m-1776165600.csv",
+      "winner": "Down",
+      "epoch": 1776165600
+    },
+    {
+      "slug": "bnb-updown-5m-1776165300",
+      "filename": "bnb-updown-5m-1776165300.csv",
+      "winner": "Down",
+      "epoch": 1776165300
+    },
     {
       "slug": "bnb-updown-5m-1776164700",
       "filename": "bnb-updown-5m-1776164700.csv",
