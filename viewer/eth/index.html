@@ -5,204 +5,625 @@
 <title>ETH 5m Market Samples</title>
 <style>
 :root {
-  --bg: #0d1117; --bg2: #161b22; --bg3: #21262d;
-  --border: #30363d; --txt: #c9d1d9; --muted: #8b949e;
-  --blue: #58a6ff; --green: #3fb950; --red: #f85149;
+  --bg-primary: #0d1117;
+  --bg-secondary: #161b22;
+  --bg-tertiary: #21262d;
+  --border: #30363d;
+  --text-primary: #c9d1d9;
+  --text-secondary: #8b949e;
+  --blue: #58a6ff;
+  --gold: #e3b341;
+  --green: #3fb950;
+  --red: #f85149;
 }
+
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body { background: var(--bg); color: var(--txt);
+
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  padding: 20px 24px; }
-.header { display: flex; justify-content: space-between; align-items: center;
-  margin-bottom: 16px; border-bottom: 1px solid var(--border); padding-bottom: 12px; }
-.header h1 { font-size: 1.25rem; font-weight: 600; }
-.muted { color: var(--muted); font-size: 0.875rem; }
-.nav { display: flex; gap: 12px; }
-.nav a { color: var(--blue); text-decoration: none; padding: 4px 10px;
-  border-radius: 4px; font-size: 0.875rem; }
-.nav a:hover { background: var(--bg3); }
-.nav a.active { background: var(--bg2); color: var(--txt); font-weight: 600; }
-.controls { display: flex; gap: 12px; align-items: center; margin: 12px 0 20px;
-  flex-wrap: wrap; }
-select, button { background: var(--bg2); color: var(--txt);
-  border: 1px solid var(--border); padding: 6px 10px; border-radius: 4px;
-  font-family: inherit; font-size: 0.875rem; }
-button { cursor: pointer; }
-button:hover { background: var(--bg3); }
-.list { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 8px; }
-.item { background: var(--bg2); border: 1px solid var(--border);
-  border-radius: 6px; padding: 10px 12px; cursor: pointer; }
-.item:hover { background: var(--bg3); }
-.item .slug { font-family: ui-monospace, SFMono-Regular, monospace;
-  font-size: 0.8rem; color: var(--muted); }
-.item .winner { font-size: 0.875rem; font-weight: 600; margin-top: 4px; }
-.winner.Up { color: var(--green); }
-.winner.Down { color: var(--red); }
-.winner.unknown, .winner.null { color: var(--muted); }
-.chart { background: var(--bg2); border: 1px solid var(--border);
-  border-radius: 6px; padding: 16px; margin-top: 16px; }
-canvas { width: 100%; height: 360px; background: var(--bg); }
-.pager { display: flex; gap: 8px; margin-top: 16px; align-items: center; }
+  padding: 20px 24px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 12px;
+}
+
+.header h1 {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.nav {
+  display: flex;
+  gap: 8px;
+}
+.nav a {
+  color: var(--blue);
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  border: 1px solid transparent;
+}
+.nav a:hover { border-color: var(--blue); }
+.nav a.active {
+  background: var(--bg-secondary);
+  border-color: var(--border);
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.text-muted { color: var(--text-secondary); font-size: 0.875rem; }
+
+.controls {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+.btn:hover:not(:disabled) { border-color: var(--blue); }
+.btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.page-info {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  font-family: 'SFMono-Regular', Consolas, monospace;
+}
+
+.filter-select {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 0.875rem;
+  font-family: 'SFMono-Regular', Consolas, monospace;
+  cursor: pointer;
+}
+
+.error-banner {
+  background: rgba(248, 81, 73, 0.15);
+  border: 1px solid var(--red);
+  color: var(--red);
+  padding: 12px 16px;
+  border-radius: 6px;
+  margin-bottom: 16px;
+}
+
+.loading-state {
+  color: var(--text-secondary);
+  text-align: center;
+  padding: 40px;
+}
+
+.graphs-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.graph-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.graph-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.graph-header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.graph-slug {
+  font-family: 'SFMono-Regular', Consolas, monospace;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--blue);
+}
+
+.graph-stats {
+  display: flex;
+  gap: 16px;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  flex-wrap: wrap;
+}
+
+.winner-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 2px 10px;
+  border-radius: 12px;
+}
+
+.winner-up { background: rgba(63, 185, 80, 0.15); color: #3fb950; }
+.winner-down { background: rgba(248, 81, 73, 0.15); color: #f85149; }
+
+.graph-canvas {
+  width: 100%;
+  height: 500px;
+  display: block;
+}
+
+.card-loading {
+  color: var(--text-secondary);
+  text-align: center;
+  padding: 60px 20px;
+}
 </style>
 </head>
 <body>
+
 <div class="header">
   <div>
     <h1>ETH 5m Market Samples</h1>
-    <div class="muted" id="meta">Loading...</div>
+    <span id="total-count" class="text-muted">Loading index...</span>
   </div>
   <div class="nav">
-    <a href="../doge/">doge</a>
-    <a href="../hype/">hype</a>
-    <a href="../eth/">eth</a>
-    <a href="../bnb/">bnb</a>
+    <a href="../doge/" id="nav-doge">DOGE</a>
+    <a href="../hype/" id="nav-hype">HYPE</a>
+    <a href="../eth/" id="nav-eth">ETH</a>
+    <a href="../bnb/" id="nav-bnb">BNB</a>
   </div>
 </div>
 
 <div class="controls">
-  <label class="muted">Filter:</label>
-  <select id="winnerFilter">
+  <button id="prev-btn" class="btn">← Prev</button>
+  <span id="page-info" class="page-info">Page 1 of 1</span>
+  <button id="next-btn" class="btn">Next →</button>
+
+  <span style="margin-left: auto;"></span>
+
+  <label class="text-muted">Filter:</label>
+  <select id="winner-filter" class="filter-select">
     <option value="all">All</option>
-    <option value="Up">Up wins</option>
-    <option value="Down">Down wins</option>
-    <option value="unknown">Unknown</option>
+    <option value="up">UP wins</option>
+    <option value="down">DOWN wins</option>
   </select>
-  <button id="reload">Reload</button>
+
+  <label class="text-muted">Sort:</label>
+  <select id="sort-order" class="filter-select">
+    <option value="desc">Newest first</option>
+    <option value="asc">Oldest first</option>
+  </select>
 </div>
 
-<div id="loading" class="muted">Loading index.json...</div>
-<div id="list" class="list"></div>
-<div id="chart" class="chart" style="display:none">
-  <div id="chartTitle" class="muted"></div>
-  <canvas id="canvas"></canvas>
-  <div class="pager">
-    <button id="back">← Back to list</button>
-  </div>
-</div>
+<div id="error-container"></div>
+<div id="loading" class="loading-state">Loading index.json...</div>
+<div id="graphs-grid" class="graphs-grid"></div>
 
 <script>
-const MARKET = "eth";
+const MARKET = "eth";                // doge | hype | eth | bnb
+const MARKET_UPPER = "ETH";
+const PRICE_COL = MARKET + "_price";        // e.g. "doge_price"
+const PAGE_SIZE = 50;
 const INDEX_PATH = "./index.json";
 const DATA_BASE = "../../csv/" + MARKET + "/";
 
-let windows = [];
-let filter = "all";
+let allWindows = [];
+let filteredWindows = [];
+let currentPage = 0;
+let currentRenderToken = 0;
 
-async function loadIndex() {
-  document.getElementById("loading").style.display = "block";
-  try {
-    const r = await fetch(INDEX_PATH + "?t=" + Date.now());
-    const d = await r.json();
-    windows = d.windows || [];
-    document.getElementById("meta").textContent =
-      d.count + " windows — last updated " + new Date(d.generated_at).toLocaleString();
-  } catch (e) {
-    document.getElementById("meta").textContent = "Failed to load index.json: " + e;
+// Mark current nav link active
+document.getElementById("nav-" + MARKET).classList.add("active");
+
+// ---------------------------------------------------------------
+// CSV parsing (data-collector-2 schema: up_bid_p1, up_ask_p1, <sym>_price)
+// ---------------------------------------------------------------
+
+async function fetchCsv(filename) {
+  const resp = await fetch(DATA_BASE + filename);
+  if (!resp.ok) throw new Error(`Failed to fetch ${filename} (${resp.status})`);
+  return await resp.text();
+}
+
+function parseCsv(text) {
+  const lines = text.split("\n");
+  const ticks = [];
+  let header = null;
+  let colIdx = {};
+
+  for (const rawLine of lines) {
+    const line = rawLine.trim();
+    if (!line) continue;
+    if (line.startsWith("#")) continue;
+
+    const parts = line.split(",");
+    if (!header) {
+      header = parts.map(s => s.trim());
+      header.forEach((name, i) => { colIdx[name] = i; });
+      if (colIdx["elapsed_sec"] === undefined) return [];
+      continue;
+    }
+
+    const elapsed = parseFloat(parts[colIdx["elapsed_sec"]]);
+    if (!Number.isFinite(elapsed)) continue;
+
+    // Top-of-book prices (p1 = best price)
+    const upAsk = parseFloat(parts[colIdx["up_ask_p1"]]);
+    const upBid = parseFloat(parts[colIdx["up_bid_p1"]]);
+    const downAsk = parseFloat(parts[colIdx["down_ask_p1"]]);
+    const downBid = parseFloat(parts[colIdx["down_bid_p1"]]);
+    const coinPriceIdx = colIdx[PRICE_COL];
+    const coinPrice = coinPriceIdx !== undefined
+      ? parseFloat(parts[coinPriceIdx])
+      : NaN;
+
+    let upMid = null, downMid = null;
+    if (Number.isFinite(upAsk) && Number.isFinite(upBid)) upMid = (upAsk + upBid) / 2;
+    else if (Number.isFinite(upAsk)) upMid = upAsk;
+    if (Number.isFinite(downAsk) && Number.isFinite(downBid)) downMid = (downAsk + downBid) / 2;
+    else if (Number.isFinite(downAsk)) downMid = downAsk;
+
+    ticks.push({
+      elapsed,
+      up_price: Number.isFinite(upMid) ? upMid : null,
+      down_price: Number.isFinite(downMid) ? downMid : null,
+      coin_price: Number.isFinite(coinPrice) ? coinPrice : null,
+    });
   }
-  render();
-  document.getElementById("loading").style.display = "none";
+  return ticks;
 }
 
-function render() {
-  const list = document.getElementById("list");
-  list.innerHTML = "";
-  const filtered = windows.filter(w => {
-    if (filter === "all") return true;
-    if (filter === "unknown") return !w.winner || w.winner === "unknown";
-    return w.winner === filter;
-  });
-  for (const w of filtered) {
-    const div = document.createElement("div");
-    div.className = "item";
-    const winnerCls = (w.winner || "unknown");
-    div.innerHTML = `<div class="slug">${w.slug}</div>
-      <div class="winner ${winnerCls}">${w.winner || "unknown"}</div>`;
-    div.onclick = () => showChart(w);
-    list.appendChild(div);
-  }
-}
+// ---------------------------------------------------------------
+// Chart drawing — dual-axis: UP odds (left, cents) + coin price (right)
+// ---------------------------------------------------------------
 
-async function showChart(w) {
-  document.getElementById("chart").style.display = "block";
-  document.getElementById("list").style.display = "none";
-  document.getElementById("chartTitle").textContent =
-    w.slug + "  —  winner: " + (w.winner || "unknown");
-  const r = await fetch(DATA_BASE + w.filename);
-  const text = await r.text();
-  drawCsv(text);
-}
-
-function drawCsv(text) {
-  const lines = text.trim().split("\n").filter(l => l && !l.startsWith("#"));
-  if (lines.length < 2) return;
-  const header = lines[0].split(",");
-  const priceIdx = header.findIndex(c => c.endsWith("_price"));
-  const elapsedIdx = header.indexOf("elapsed_sec");
-  const upBidIdx = header.indexOf("up_bid_p1");
-  const upAskIdx = header.indexOf("up_ask_p1");
-
-  const rows = lines.slice(1).map(l => l.split(","));
-  const points = rows.map(r => ({
-    t: parseFloat(r[elapsedIdx]),
-    price: parseFloat(r[priceIdx]),
-    up_bid: parseFloat(r[upBidIdx]),
-    up_ask: parseFloat(r[upAskIdx]),
-  })).filter(p => !isNaN(p.t));
-
-  const canvas = document.getElementById("canvas");
+function drawChart(canvas, ticks) {
   const ctx = canvas.getContext("2d");
-  const W = canvas.width = canvas.clientWidth;
-  const H = canvas.height = canvas.clientHeight;
-  ctx.clearRect(0, 0, W, H);
+  const dpr = window.devicePixelRatio || 1;
+  const width = canvas.clientWidth;
+  const height = canvas.clientHeight;
 
-  const tMin = 0, tMax = 300;
-  const prices = points.map(p => p.price).filter(v => !isNaN(v));
-  if (!prices.length) return;
-  const pMin = Math.min(...prices), pMax = Math.max(...prices);
-  const pad = (pMax - pMin) * 0.05 || 1;
+  canvas.width = width * dpr;
+  canvas.height = height * dpr;
+  ctx.scale(dpr, dpr);
 
-  const xOf = t => ((t - tMin) / (tMax - tMin)) * (W - 60) + 40;
-  const yOf = v => H - 30 - ((v - (pMin - pad)) / ((pMax + pad) - (pMin - pad))) * (H - 60);
+  const pad = { top: 20, right: 80, bottom: 35, left: 40 };
+  const cw = width - pad.left - pad.right;
+  const ch = height - pad.top - pad.bottom;
 
-  // Price line
+  ctx.fillStyle = "#161b22";
+  ctx.fillRect(0, 0, width, height);
+
+  if (!ticks || ticks.length === 0) return;
+
+  const minE = 0, maxE = 300, rangeE = maxE - minE;
+  const toX = (e) => pad.left + ((e - minE) / rangeE) * cw;
+  const toY = (p) => pad.top + (1 - p) * ch;
+
+  // --- Grid every 5¢ ---
+  ctx.strokeStyle = "#30363d";
+  ctx.lineWidth = 0.5;
+  for (let c = 0; c <= 100; c += 5) {
+    const y = toY(c / 100);
+    ctx.beginPath();
+    ctx.moveTo(pad.left, y);
+    ctx.lineTo(pad.left + cw, y);
+    ctx.stroke();
+  }
+
+  // --- 50¢ neutral line ---
+  ctx.strokeStyle = "#484f58";
+  ctx.lineWidth = 1.5;
+  ctx.setLineDash([6, 4]);
+  const midY = toY(0.5);
+  ctx.beginPath();
+  ctx.moveTo(pad.left, midY);
+  ctx.lineTo(pad.left + cw, midY);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // --- UP odds line (left Y-axis, 0-100¢) ---
   ctx.strokeStyle = "#58a6ff";
   ctx.lineWidth = 2;
   ctx.beginPath();
-  points.forEach((p, i) => {
-    if (isNaN(p.price)) return;
-    const x = xOf(p.t), y = yOf(p.price);
-    if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
-  });
+  let started = false;
+  for (const t of ticks) {
+    if (t.up_price == null) continue;
+    const x = toX(t.elapsed);
+    const y = toY(t.up_price);
+    if (!started) { ctx.moveTo(x, y); started = true; }
+    else ctx.lineTo(x, y);
+  }
   ctx.stroke();
 
-  // Axes
-  ctx.strokeStyle = "#30363d";
-  ctx.strokeRect(40, 20, W - 60, H - 50);
+  // --- Coin price line (right Y-axis, centered on open) ---
+  const coinPrices = ticks.map(t => t.coin_price).filter(v => v != null);
+  let coinLow, coinHigh, toCoinY, coinOpen;
+  if (coinPrices.length > 0) {
+    coinOpen = coinPrices[0];
+    let maxDev = 0;
+    for (const p of coinPrices) {
+      const dev = Math.abs(p - coinOpen);
+      if (dev > maxDev) maxDev = dev;
+    }
+    if (maxDev === 0) maxDev = coinOpen * 0.0005 || 1; // tiny fallback
+    const halfRange = maxDev * 1.1;
+    coinLow = coinOpen - halfRange;
+    coinHigh = coinOpen + halfRange;
+    toCoinY = (p) => pad.top + ((coinHigh - p) / (coinHigh - coinLow)) * ch;
 
+    ctx.strokeStyle = "#e3b341";
+    ctx.lineWidth = 1.5;
+    ctx.globalAlpha = 0.75;
+    ctx.beginPath();
+    let cs = false;
+    for (const t of ticks) {
+      if (t.coin_price == null) continue;
+      const x = toX(t.elapsed);
+      const y = toCoinY(t.coin_price);
+      if (!cs) { ctx.moveTo(x, y); cs = true; }
+      else ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+    ctx.globalAlpha = 1.0;
+
+    // Right Y-axis labels (coin price)
+    ctx.fillStyle = "#e3b341";
+    ctx.font = "10px -apple-system, sans-serif";
+    ctx.textAlign = "left";
+    ctx.textBaseline = "middle";
+    const coinStep = (coinHigh - coinLow) / 4;
+    const fmt = (v) => {
+      if (v >= 1000) return "$" + Math.round(v).toLocaleString();
+      if (v >= 1) return "$" + v.toFixed(2);
+      if (v >= 0.01) return "$" + v.toFixed(4);
+      return "$" + v.toPrecision(4);
+    };
+    for (let i = 0; i <= 4; i++) {
+      const val = coinLow + coinStep * i;
+      ctx.fillText(fmt(val), pad.left + cw + 6, toCoinY(val));
+    }
+  }
+
+  // --- Left Y-axis labels (cents) ---
   ctx.fillStyle = "#8b949e";
-  ctx.font = "11px ui-monospace";
-  ctx.fillText(pMax.toFixed(2), 4, 24);
-  ctx.fillText(pMin.toFixed(2), 4, H - 30);
-  ctx.fillText("t=0s", 40, H - 10);
-  ctx.fillText("t=300s", W - 60, H - 10);
+  ctx.font = "11px -apple-system, sans-serif";
+  ctx.textAlign = "right";
+  ctx.textBaseline = "middle";
+  for (let c = 0; c <= 100; c += 10) {
+    ctx.fillText(c, pad.left - 6, toY(c / 100));
+  }
+
+  // --- X-axis labels (seconds) ---
+  ctx.textAlign = "center";
+  ctx.textBaseline = "top";
+  for (let e = 0; e <= 300; e += 30) {
+    ctx.fillText(`${e}s`, toX(e), pad.top + ch + 8);
+  }
+  ctx.fillText("Elapsed (seconds)", pad.left + cw / 2, height - 4);
+
+  // --- Legend ---
+  ctx.textAlign = "left";
+  ctx.textBaseline = "top";
+
+  ctx.strokeStyle = "#58a6ff";
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(pad.left + 8, pad.top + 6);
+  ctx.lineTo(pad.left + 28, pad.top + 6);
+  ctx.stroke();
+  ctx.fillStyle = "#58a6ff";
+  ctx.font = "12px -apple-system, sans-serif";
+  ctx.fillText("UP odds", pad.left + 32, pad.top);
+
+  ctx.strokeStyle = "#e3b341";
+  ctx.lineWidth = 1.5;
+  ctx.beginPath();
+  ctx.moveTo(pad.left + 95, pad.top + 6);
+  ctx.lineTo(pad.left + 115, pad.top + 6);
+  ctx.stroke();
+  ctx.fillStyle = "#e3b341";
+  ctx.fillText(MARKET_UPPER, pad.left + 119, pad.top);
+
+  ctx.fillStyle = "#484f58";
+  ctx.fillText("50¢ = neutral", pad.left + 165, pad.top);
+
+  // Zone markers
+  ctx.fillStyle = "#3fb950";
+  ctx.font = "10px -apple-system, sans-serif";
+  ctx.textAlign = "right";
+  ctx.fillText("UP winning ▲", pad.left + cw, toY(0.75));
+  ctx.fillStyle = "#f85149";
+  ctx.fillText("DOWN winning ▼", pad.left + cw, toY(0.25));
 }
 
-document.getElementById("winnerFilter").onchange = (e) => {
-  filter = e.target.value; render();
-};
-document.getElementById("reload").onclick = loadIndex;
-document.getElementById("back").onclick = () => {
-  document.getElementById("chart").style.display = "none";
-  document.getElementById("list").style.display = "grid";
-};
+// ---------------------------------------------------------------
+// Card rendering
+// ---------------------------------------------------------------
 
-// Mark current nav link active
-document.querySelectorAll(".nav a").forEach(a => {
-  if (a.getAttribute("href").includes(MARKET)) a.classList.add("active");
+function buildCardSkeleton(meta) {
+  const card = document.createElement("div");
+  card.className = "graph-card";
+
+  const winner = (meta.winner || "").toLowerCase();
+  let winBadge = "";
+  if (winner.startsWith("up")) {
+    winBadge = `<span class="winner-badge winner-up">▲ UP Won</span>`;
+  } else if (winner.startsWith("down")) {
+    winBadge = `<span class="winner-badge winner-down">▼ DOWN Won</span>`;
+  }
+
+  card.innerHTML = `
+    <div class="graph-header">
+      <div class="graph-header-left">
+        <span class="graph-slug">${meta.slug}</span>
+        ${winBadge}
+      </div>
+      <div class="graph-stats" data-stats><span>Loading...</span></div>
+    </div>
+    <div class="card-loading" data-loading>Loading chart...</div>
+    <canvas class="graph-canvas" data-canvas style="display:none"></canvas>
+  `;
+  return card;
+}
+
+function fillCardWithData(card, ticks) {
+  const ups = ticks.map(t => t.up_price).filter(v => v != null);
+  const firstUp = ups.length ? ups[0] : null;
+  const lastUp = ups.length ? ups[ups.length - 1] : null;
+  const maxUp = ups.length ? Math.max(...ups) : null;
+  const minUp = ups.length ? Math.min(...ups) : null;
+  const startE = ticks.length ? Math.round(ticks[0].elapsed) : 0;
+  const endE = ticks.length ? Math.round(ticks[ticks.length - 1].elapsed) : 0;
+  const fmt = (v) => v == null ? "—" : v.toFixed(3);
+
+  card.querySelector("[data-stats]").innerHTML = `
+    <span>Start: ${fmt(firstUp)}</span>
+    <span>End: ${fmt(lastUp)}</span>
+    <span>High: ${fmt(maxUp)}</span>
+    <span>Low: ${fmt(minUp)}</span>
+    <span>${startE}s → ${endE}s</span>
+    <span>${ticks.length} ticks</span>
+  `;
+
+  card.querySelector("[data-loading]").style.display = "none";
+  const canvas = card.querySelector("[data-canvas]");
+  canvas.style.display = "block";
+  requestAnimationFrame(() => drawChart(canvas, ticks));
+}
+
+function fillCardWithError(card, message) {
+  card.querySelector("[data-loading]").textContent = `Error: ${message}`;
+}
+
+// ---------------------------------------------------------------
+// Page rendering
+// ---------------------------------------------------------------
+
+async function renderPage() {
+  const grid = document.getElementById("graphs-grid");
+  grid.innerHTML = "";
+
+  const token = ++currentRenderToken;
+
+  const start = currentPage * PAGE_SIZE;
+  const end = Math.min(start + PAGE_SIZE, filteredWindows.length);
+  const slice = filteredWindows.slice(start, end);
+
+  const totalPages = Math.max(1, Math.ceil(filteredWindows.length / PAGE_SIZE));
+  document.getElementById("page-info").textContent =
+    `Page ${currentPage + 1} of ${totalPages}  (showing ${start + 1}-${end} of ${filteredWindows.length})`;
+  document.getElementById("prev-btn").disabled = currentPage === 0;
+  document.getElementById("next-btn").disabled = currentPage >= totalPages - 1;
+
+  const cards = slice.map(meta => {
+    const card = buildCardSkeleton(meta);
+    grid.appendChild(card);
+    return { meta, card };
+  });
+
+  const BATCH = 8;
+  for (let i = 0; i < cards.length; i += BATCH) {
+    if (token !== currentRenderToken) return;
+    const chunk = cards.slice(i, i + BATCH);
+    await Promise.all(chunk.map(async ({ meta, card }) => {
+      try {
+        const text = await fetchCsv(meta.filename);
+        if (token !== currentRenderToken) return;
+        const ticks = parseCsv(text);
+        if (ticks.length === 0) {
+          fillCardWithError(card, "no ticks");
+        } else {
+          fillCardWithData(card, ticks);
+        }
+      } catch (e) {
+        if (token !== currentRenderToken) return;
+        fillCardWithError(card, e.message);
+      }
+    }));
+  }
+}
+
+function applyFilters() {
+  const winnerFilter = document.getElementById("winner-filter").value;
+  const sortOrder = document.getElementById("sort-order").value;
+
+  filteredWindows = allWindows.filter(w => {
+    if (winnerFilter === "all") return true;
+    return (w.winner || "").toLowerCase().startsWith(winnerFilter);
+  });
+
+  filteredWindows.sort((a, b) => {
+    const cmp = (a.epoch || 0) - (b.epoch || 0);
+    return sortOrder === "desc" ? -cmp : cmp;
+  });
+
+  currentPage = 0;
+  renderPage();
+}
+
+// ---------------------------------------------------------------
+// Boot
+// ---------------------------------------------------------------
+
+(async () => {
+  try {
+    const resp = await fetch(INDEX_PATH + "?t=" + Date.now());
+    if (!resp.ok) {
+      throw new Error(
+        `Cannot load ${INDEX_PATH} (HTTP ${resp.status}). ` +
+        `Run 'python3 viewer/build_index.py' first to generate it.`
+      );
+    }
+    const index = await resp.json();
+    allWindows = index.windows || [];
+
+    document.getElementById("loading").style.display = "none";
+    document.getElementById("total-count").textContent =
+      `${allWindows.length} markets indexed`;
+    applyFilters();
+  } catch (e) {
+    document.getElementById("loading").style.display = "none";
+    const err = document.createElement("div");
+    err.className = "error-banner";
+    err.textContent = `Error: ${e.message}`;
+    document.getElementById("error-container").appendChild(err);
+  }
+})();
+
+document.getElementById("prev-btn").addEventListener("click", () => {
+  if (currentPage > 0) { currentPage--; renderPage(); window.scrollTo(0, 0); }
 });
-
-loadIndex();
+document.getElementById("next-btn").addEventListener("click", () => {
+  const totalPages = Math.ceil(filteredWindows.length / PAGE_SIZE);
+  if (currentPage < totalPages - 1) { currentPage++; renderPage(); window.scrollTo(0, 0); }
+});
+document.getElementById("winner-filter").addEventListener("change", applyFilters);
+document.getElementById("sort-order").addEventListener("change", applyFilters);
 </script>
+
 </body>
 </html>
