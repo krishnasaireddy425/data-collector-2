@@ -1,8 +1,20 @@
 {
   "market": "doge",
-  "generated_at": "2026-04-14T09:40:11.341540+00:00",
-  "count": 2,
+  "generated_at": "2026-04-14T09:55:11.860044+00:00",
+  "count": 4,
   "windows": [
+    {
+      "slug": "doge-updown-5m-1776160200",
+      "filename": "doge-updown-5m-1776160200.csv",
+      "winner": "Up",
+      "epoch": 1776160200
+    },
+    {
+      "slug": "doge-updown-5m-1776159900",
+      "filename": "doge-updown-5m-1776159900.csv",
+      "winner": "Down",
+      "epoch": 1776159900
+    },
     {
       "slug": "doge-updown-5m-1776159300",
       "filename": "doge-updown-5m-1776159300.csv",
