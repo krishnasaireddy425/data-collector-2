@@ -101,8 +101,11 @@ class MarketWindow:
         now = time.time()
         elapsed = round(now - self.open_epoch, 3)
 
-        # Capture from t=0.5 to t=303 — 3s past the boundary to catch late ticks.
-        if elapsed < 0.5 or elapsed > 303.0:
+        # Capture from t=0 to t=303 — 3s past the boundary to catch late ticks.
+        # Lower bound removed so the initial write_tick() at market open
+        # records whatever we have (REST-seeded book + latest Chainlink price)
+        # instead of waiting for the next trigger.
+        if elapsed < 0 or elapsed > 303.0:
             return
         # Rate limit: max 5 writes/sec.
         if now - self._last_write < 0.2:
@@ -406,7 +409,7 @@ async def chainlink_listener(oracle_state, callbacks, stop_event):
             if stop_event.is_set():
                 break
             print(f"  Chainlink WS error: {e}, reconnecting...")
-            await asyncio.sleep(2)
+            await asyncio.sleep(0.5)
 
 
 def _apply_book_snapshot(state, side, bids, asks):
@@ -475,42 +478,53 @@ async def record_market(market, oracle_state, callbacks):
     token_map = {market.token_id_up: "up", market.token_id_down: "down"}
 
     try:
-        async with websockets.connect(
-            CLOB_WS, ssl=ssl_context, ping_interval=20
-        ) as ws:
-            sub_msg = {
-                "type": "market",
-                "assets_ids": [market.token_id_up, market.token_id_down],
-            }
-            await ws.send(json.dumps(sub_msg))
-            print(f"  [{market.name.upper()}] WS subscribed for {market.slug}")
+        # Reconnect loop — if the CLOB WS drops mid-window (common on thin
+        # markets after periods of inactivity) we reconnect and keep recording
+        # until the window ends. Chainlink callback stays registered across
+        # reconnects so oracle price writes continue uninterrupted.
+        while time.time() < market.close_epoch + 1:
+            try:
+                async with websockets.connect(
+                    CLOB_WS, ssl=ssl_context, ping_interval=20
+                ) as ws:
+                    sub_msg = {
+                        "type": "market",
+                        "assets_ids": [market.token_id_up, market.token_id_down],
+                    }
+                    await ws.send(json.dumps(sub_msg))
+                    print(f"  [{market.name.upper()}] WS subscribed for {market.slug}")
 
-            while time.time() < market.close_epoch + 1:
-                try:
-                    raw = await asyncio.wait_for(ws.recv(), timeout=2.0)
-                except asyncio.TimeoutError:
-                    continue
-                try:
-                    msgs = json.loads(raw)
-                except json.JSONDecodeError:
-                    continue
-                if not isinstance(msgs, list):
-                    msgs = [msgs]
+                    while time.time() < market.close_epoch + 1:
+                        try:
+                            raw = await asyncio.wait_for(ws.recv(), timeout=2.0)
+                        except asyncio.TimeoutError:
+                            continue
+                        try:
+                            msgs = json.loads(raw)
+                        except json.JSONDecodeError:
+                            continue
+                        if not isinstance(msgs, list):
+                            msgs = [msgs]
 
-                for msg in msgs:
-                    event_type = msg.get("event_type", "")
-                    asset_id = msg.get("asset_id", "")
-                    if asset_id not in token_map:
-                        continue
-                    side = token_map[asset_id]
+                        for msg in msgs:
+                            event_type = msg.get("event_type", "")
+                            asset_id = msg.get("asset_id", "")
+                            if asset_id not in token_map:
+                                continue
+                            side = token_map[asset_id]
 
-                    if event_type == "book":
-                        _apply_book_snapshot(state, side,
-                                             msg.get("bids", []), msg.get("asks", []))
-                        market.write_tick(state, oracle_state[sym])
-
-    except Exception as e:
-        print(f"  [{market.name.upper()}] WS error for {market.slug}: {e}")
+                            if event_type == "book":
+                                _apply_book_snapshot(state, side,
+                                                     msg.get("bids", []), msg.get("asks", []))
+                                market.write_tick(state, oracle_state[sym])
+            except Exception as ws_err:
+                # If the window's still open, reconnect. Otherwise exit cleanly.
+                if time.time() < market.close_epoch + 1:
+                    print(f"  [{market.name.upper()}] CLOB WS dropped: {ws_err}, "
+                          f"reconnecting...")
+                    await asyncio.sleep(0.5)
+                else:
+                    break
     finally:
         # Stop receiving oracle ticks for this symbol
         callbacks.pop(sym, None)
