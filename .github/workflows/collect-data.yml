@@ -1,0 +1,81 @@
+name: Collect 5m Multi-Market Price Data
+
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: collect-data
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  actions: write
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    # 6 hour GitHub limit; cap at 5h50m to leave room for git push
+    timeout-minutes: 350
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      # Don't fail the job if collector crashes — still commit what was captured.
+      # PYTHONUNBUFFERED=1 -> live log streaming
+      - name: Run multi-market collector (60 windows per market ~5 hours)
+        continue-on-error: true
+        env:
+          PYTHONUNBUFFERED: "1"
+        run: |
+          python -u -m price_collector.main --windows 60
+
+      - name: Rebuild viewer indexes
+        if: always()
+        run: |
+          python3 viewer/build_index.py || true
+
+      - name: Commit and push collected CSVs
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git pull --rebase origin main || true
+
+          git add csv/doge/*.csv 2>/dev/null || true
+          git add csv/hype/*.csv 2>/dev/null || true
+          git add csv/eth/*.csv 2>/dev/null || true
+          git add csv/bnb/*.csv 2>/dev/null || true
+          git add viewer/*/index.json 2>/dev/null || true
+
+          if git diff --staged --quiet; then
+            echo "No new CSVs to commit."
+            exit 0
+          fi
+
+          NEW_COUNT=$(git diff --staged --name-only | grep -c "^csv/" || echo "0")
+          DATE=$(date -u +"%Y-%m-%d %H:%M UTC")
+          git commit -m "Collect data: $NEW_COUNT new windows ($DATE)"
+          git push origin main
+
+      # Self-chain: trigger the next run on success or failure, but NOT on
+      # user cancellation (so `Cancel workflow` actually stops the chain).
+      - name: Trigger next run
+        if: ${{ !cancelled() }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh workflow run collect-data.yml --ref main
