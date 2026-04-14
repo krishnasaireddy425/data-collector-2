@@ -1,8 +1,20 @@
 {
   "market": "eth",
-  "generated_at": "2026-04-14T13:10:11.244921+00:00",
-  "count": 30,
+  "generated_at": "2026-04-14T13:25:01.337162+00:00",
+  "count": 32,
   "windows": [
+    {
+      "slug": "eth-updown-5m-1776172800",
+      "filename": "eth-updown-5m-1776172800.csv",
+      "winner": "Up",
+      "epoch": 1776172800
+    },
+    {
+      "slug": "eth-updown-5m-1776172500",
+      "filename": "eth-updown-5m-1776172500.csv",
+      "winner": "Up",
+      "epoch": 1776172500
+    },
     {
       "slug": "eth-updown-5m-1776171900",
       "filename": "eth-updown-5m-1776171900.csv",

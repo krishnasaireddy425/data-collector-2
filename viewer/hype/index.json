@@ -1,8 +1,20 @@
 {
   "market": "hype",
-  "generated_at": "2026-04-14T13:10:11.243584+00:00",
-  "count": 30,
+  "generated_at": "2026-04-14T13:25:01.335684+00:00",
+  "count": 32,
   "windows": [
+    {
+      "slug": "hype-updown-5m-1776172800",
+      "filename": "hype-updown-5m-1776172800.csv",
+      "winner": "Up",
+      "epoch": 1776172800
+    },
+    {
+      "slug": "hype-updown-5m-1776172500",
+      "filename": "hype-updown-5m-1776172500.csv",
+      "winner": "Up",
+      "epoch": 1776172500
+    },
     {
       "slug": "hype-updown-5m-1776171900",
       "filename": "hype-updown-5m-1776171900.csv",
