@@ -36,12 +36,13 @@ jobs:
 
       # Don't fail the job if collector crashes — still commit what was captured.
       # PYTHONUNBUFFERED=1 -> live log streaming
-      - name: Run multi-market collector (60 windows per market ~5 hours)
+      # --windows 2 is a smoke test; bump to 60 once first run produces CSVs correctly.
+      - name: Run multi-market collector (2 windows per market ~10 min)
         continue-on-error: true
         env:
           PYTHONUNBUFFERED: "1"
         run: |
-          python -u -m price_collector.main --windows 60
+          python -u -m price_collector.main --windows 2
 
       - name: Rebuild viewer indexes
         if: always()
