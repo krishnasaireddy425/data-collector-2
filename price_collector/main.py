@@ -101,11 +101,8 @@ class MarketWindow:
         now = time.time()
         elapsed = round(now - self.open_epoch, 3)
 
-        # Capture from t=0 to t=303 — 3s past the boundary to catch late ticks.
-        # Lower bound removed so the initial write_tick() at market open
-        # records whatever we have (REST-seeded book + latest Chainlink price)
-        # instead of waiting for the next trigger.
-        if elapsed < 0 or elapsed > 303.0:
+        # Capture from t=0.5 to t=302.5 — 2.5s past the boundary to catch late ticks.
+        if elapsed < 0.5 or elapsed > 302.5:
             return
         # Rate limit: max 5 writes/sec.
         if now - self._last_write < 0.2:
@@ -409,7 +406,7 @@ async def chainlink_listener(oracle_state, callbacks, stop_event):
             if stop_event.is_set():
                 break
             print(f"  Chainlink WS error: {e}, reconnecting...")
-            await asyncio.sleep(0.5)
+            await asyncio.sleep(1.0)
 
 
 def _apply_book_snapshot(state, side, bids, asks):
@@ -557,13 +554,17 @@ async def run_market_family(cfg, num_windows, oracle_state, callbacks):
         close_str = datetime.fromtimestamp(m.close_epoch, tz=timezone.utc).strftime('%H:%M')
         print(f"  [{cfg['name'].upper()}] queued {m.slug} ({open_str} → {close_str} UTC)")
 
-    # Record sequentially — windows don't overlap in time.
-    # Each call returns when the window closes (~5 min).
-    for m in to_record:
-        try:
-            await record_market(m, oracle_state, callbacks)
-        except Exception as e:
-            print(f"  [{cfg['name'].upper()}] record error on {m.slug}: {e}")
+    # Record all windows in parallel. Each record_market() independently
+    # waits until (open_epoch - 10) to seed, so the 10s pre-open buffer is
+    # preserved for EVERY window — not just the first one. This mirrors the
+    # BTC collector's asyncio.gather pattern and fixes the handover gap
+    # that was losing the first 10s of ~30% of windows.
+    tasks = [asyncio.create_task(record_market(m, oracle_state, callbacks))
+             for m in to_record]
+    results = await asyncio.gather(*tasks, return_exceptions=True)
+    for m, r in zip(to_record, results):
+        if isinstance(r, Exception):
+            print(f"  [{cfg['name'].upper()}] record error on {m.slug}: {r}")
 
     return to_record
 

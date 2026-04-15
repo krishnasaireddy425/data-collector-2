@@ -283,8 +283,10 @@ function parseCsv(text) {
     let upMid = null, downMid = null;
     if (Number.isFinite(upAsk) && Number.isFinite(upBid)) upMid = (upAsk + upBid) / 2;
     else if (Number.isFinite(upAsk)) upMid = upAsk;
+    else if (Number.isFinite(upBid)) upMid = upBid;
     if (Number.isFinite(downAsk) && Number.isFinite(downBid)) downMid = (downAsk + downBid) / 2;
     else if (Number.isFinite(downAsk)) downMid = downAsk;
+    else if (Number.isFinite(downBid)) downMid = downBid;
 
     ticks.push({
       elapsed,
