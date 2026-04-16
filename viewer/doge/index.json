@@ -1,8 +1,368 @@
 {
   "market": "doge",
-  "generated_at": "2026-04-16T12:55:01.595816+00:00",
-  "count": 300,
+  "generated_at": "2026-04-16T18:00:01.634375+00:00",
+  "count": 360,
   "windows": [
+    {
+      "slug": "doge-updown-5m-1776362100",
+      "filename": "doge-updown-5m-1776362100.csv",
+      "winner": "Up",
+      "epoch": 1776362100
+    },
+    {
+      "slug": "doge-updown-5m-1776361800",
+      "filename": "doge-updown-5m-1776361800.csv",
+      "winner": "Down",
+      "epoch": 1776361800
+    },
+    {
+      "slug": "doge-updown-5m-1776361500",
+      "filename": "doge-updown-5m-1776361500.csv",
+      "winner": "Up",
+      "epoch": 1776361500
+    },
+    {
+      "slug": "doge-updown-5m-1776361200",
+      "filename": "doge-updown-5m-1776361200.csv",
+      "winner": "Up",
+      "epoch": 1776361200
+    },
+    {
+      "slug": "doge-updown-5m-1776360900",
+      "filename": "doge-updown-5m-1776360900.csv",
+      "winner": "Up",
+      "epoch": 1776360900
+    },
+    {
+      "slug": "doge-updown-5m-1776360600",
+      "filename": "doge-updown-5m-1776360600.csv",
+      "winner": "Down",
+      "epoch": 1776360600
+    },
+    {
+      "slug": "doge-updown-5m-1776360300",
+      "filename": "doge-updown-5m-1776360300.csv",
+      "winner": "Up",
+      "epoch": 1776360300
+    },
+    {
+      "slug": "doge-updown-5m-1776360000",
+      "filename": "doge-updown-5m-1776360000.csv",
+      "winner": "Up",
+      "epoch": 1776360000
+    },
+    {
+      "slug": "doge-updown-5m-1776359700",
+      "filename": "doge-updown-5m-1776359700.csv",
+      "winner": "Up",
+      "epoch": 1776359700
+    },
+    {
+      "slug": "doge-updown-5m-1776359400",
+      "filename": "doge-updown-5m-1776359400.csv",
+      "winner": "Down",
+      "epoch": 1776359400
+    },
+    {
+      "slug": "doge-updown-5m-1776359100",
+      "filename": "doge-updown-5m-1776359100.csv",
+      "winner": "Up",
+      "epoch": 1776359100
+    },
+    {
+      "slug": "doge-updown-5m-1776358800",
+      "filename": "doge-updown-5m-1776358800.csv",
+      "winner": "Down",
+      "epoch": 1776358800
+    },
+    {
+      "slug": "doge-updown-5m-1776358500",
+      "filename": "doge-updown-5m-1776358500.csv",
+      "winner": "Up",
+      "epoch": 1776358500
+    },
+    {
+      "slug": "doge-updown-5m-1776358200",
+      "filename": "doge-updown-5m-1776358200.csv",
+      "winner": "Down",
+      "epoch": 1776358200
+    },
+    {
+      "slug": "doge-updown-5m-1776357900",
+      "filename": "doge-updown-5m-1776357900.csv",
+      "winner": "Up",
+      "epoch": 1776357900
+    },
+    {
+      "slug": "doge-updown-5m-1776357600",
+      "filename": "doge-updown-5m-1776357600.csv",
+      "winner": "Down",
+      "epoch": 1776357600
+    },
+    {
+      "slug": "doge-updown-5m-1776357300",
+      "filename": "doge-updown-5m-1776357300.csv",
+      "winner": "Up",
+      "epoch": 1776357300
+    },
+    {
+      "slug": "doge-updown-5m-1776357000",
+      "filename": "doge-updown-5m-1776357000.csv",
+      "winner": "Down",
+      "epoch": 1776357000
+    },
+    {
+      "slug": "doge-updown-5m-1776356700",
+      "filename": "doge-updown-5m-1776356700.csv",
+      "winner": "Up",
+      "epoch": 1776356700
+    },
+    {
+      "slug": "doge-updown-5m-1776356400",
+      "filename": "doge-updown-5m-1776356400.csv",
+      "winner": "Down",
+      "epoch": 1776356400
+    },
+    {
+      "slug": "doge-updown-5m-1776356100",
+      "filename": "doge-updown-5m-1776356100.csv",
+      "winner": "Up",
+      "epoch": 1776356100
+    },
+    {
+      "slug": "doge-updown-5m-1776355800",
+      "filename": "doge-updown-5m-1776355800.csv",
+      "winner": "Down",
+      "epoch": 1776355800
+    },
+    {
+      "slug": "doge-updown-5m-1776355500",
+      "filename": "doge-updown-5m-1776355500.csv",
+      "winner": "Up",
+      "epoch": 1776355500
+    },
+    {
+      "slug": "doge-updown-5m-1776355200",
+      "filename": "doge-updown-5m-1776355200.csv",
+      "winner": "Up",
+      "epoch": 1776355200
+    },
+    {
+      "slug": "doge-updown-5m-1776354900",
+      "filename": "doge-updown-5m-1776354900.csv",
+      "winner": "Up",
+      "epoch": 1776354900
+    },
+    {
+      "slug": "doge-updown-5m-1776354600",
+      "filename": "doge-updown-5m-1776354600.csv",
+      "winner": "Up",
+      "epoch": 1776354600
+    },
+    {
+      "slug": "doge-updown-5m-1776354300",
+      "filename": "doge-updown-5m-1776354300.csv",
+      "winner": "Down",
+      "epoch": 1776354300
+    },
+    {
+      "slug": "doge-updown-5m-1776354000",
+      "filename": "doge-updown-5m-1776354000.csv",
+      "winner": "Up",
+      "epoch": 1776354000
+    },
+    {
+      "slug": "doge-updown-5m-1776353700",
+      "filename": "doge-updown-5m-1776353700.csv",
+      "winner": "Up",
+      "epoch": 1776353700
+    },
+    {
+      "slug": "doge-updown-5m-1776353400",
+      "filename": "doge-updown-5m-1776353400.csv",
+      "winner": "Up",
+      "epoch": 1776353400
+    },
+    {
+      "slug": "doge-updown-5m-1776353100",
+      "filename": "doge-updown-5m-1776353100.csv",
+      "winner": "Down",
+      "epoch": 1776353100
+    },
+    {
+      "slug": "doge-updown-5m-1776352800",
+      "filename": "doge-updown-5m-1776352800.csv",
+      "winner": "Up",
+      "epoch": 1776352800
+    },
+    {
+      "slug": "doge-updown-5m-1776352500",
+      "filename": "doge-updown-5m-1776352500.csv",
+      "winner": "Down",
+      "epoch": 1776352500
+    },
+    {
+      "slug": "doge-updown-5m-1776352200",
+      "filename": "doge-updown-5m-1776352200.csv",
+      "winner": "Up",
+      "epoch": 1776352200
+    },
+    {
+      "slug": "doge-updown-5m-1776351900",
+      "filename": "doge-updown-5m-1776351900.csv",
+      "winner": "Up",
+      "epoch": 1776351900
+    },
+    {
+      "slug": "doge-updown-5m-1776351600",
+      "filename": "doge-updown-5m-1776351600.csv",
+      "winner": "Up",
+      "epoch": 1776351600
+    },
+    {
+      "slug": "doge-updown-5m-1776351300",
+      "filename": "doge-updown-5m-1776351300.csv",
+      "winner": "Down",
+      "epoch": 1776351300
+    },
+    {
+      "slug": "doge-updown-5m-1776351000",
+      "filename": "doge-updown-5m-1776351000.csv",
+      "winner": "Up",
+      "epoch": 1776351000
+    },
+    {
+      "slug": "doge-updown-5m-1776350700",
+      "filename": "doge-updown-5m-1776350700.csv",
+      "winner": "Up",
+      "epoch": 1776350700
+    },
+    {
+      "slug": "doge-updown-5m-1776350400",
+      "filename": "doge-updown-5m-1776350400.csv",
+      "winner": "Up",
+      "epoch": 1776350400
+    },
+    {
+      "slug": "doge-updown-5m-1776350100",
+      "filename": "doge-updown-5m-1776350100.csv",
+      "winner": "Down",
+      "epoch": 1776350100
+    },
+    {
+      "slug": "doge-updown-5m-1776349800",
+      "filename": "doge-updown-5m-1776349800.csv",
+      "winner": "Up",
+      "epoch": 1776349800
+    },
+    {
+      "slug": "doge-updown-5m-1776349500",
+      "filename": "doge-updown-5m-1776349500.csv",
+      "winner": "Up",
+      "epoch": 1776349500
+    },
+    {
+      "slug": "doge-updown-5m-1776349200",
+      "filename": "doge-updown-5m-1776349200.csv",
+      "winner": "Down",
+      "epoch": 1776349200
+    },
+    {
+      "slug": "doge-updown-5m-1776348900",
+      "filename": "doge-updown-5m-1776348900.csv",
+      "winner": "Down",
+      "epoch": 1776348900
+    },
+    {
+      "slug": "doge-updown-5m-1776348600",
+      "filename": "doge-updown-5m-1776348600.csv",
+      "winner": "Down",
+      "epoch": 1776348600
+    },
+    {
+      "slug": "doge-updown-5m-1776348300",
+      "filename": "doge-updown-5m-1776348300.csv",
+      "winner": "Up",
+      "epoch": 1776348300
+    },
+    {
+      "slug": "doge-updown-5m-1776348000",
+      "filename": "doge-updown-5m-1776348000.csv",
+      "winner": "Down",
+      "epoch": 1776348000
+    },
+    {
+      "slug": "doge-updown-5m-1776347700",
+      "filename": "doge-updown-5m-1776347700.csv",
+      "winner": "Up",
+      "epoch": 1776347700
+    },
+    {
+      "slug": "doge-updown-5m-1776347400",
+      "filename": "doge-updown-5m-1776347400.csv",
+      "winner": "Down",
+      "epoch": 1776347400
+    },
+    {
+      "slug": "doge-updown-5m-1776347100",
+      "filename": "doge-updown-5m-1776347100.csv",
+      "winner": "Down",
+      "epoch": 1776347100
+    },
+    {
+      "slug": "doge-updown-5m-1776346800",
+      "filename": "doge-updown-5m-1776346800.csv",
+      "winner": "Up",
+      "epoch": 1776346800
+    },
+    {
+      "slug": "doge-updown-5m-1776346500",
+      "filename": "doge-updown-5m-1776346500.csv",
+      "winner": "Down",
+      "epoch": 1776346500
+    },
+    {
+      "slug": "doge-updown-5m-1776346200",
+      "filename": "doge-updown-5m-1776346200.csv",
+      "winner": "Down",
+      "epoch": 1776346200
+    },
+    {
+      "slug": "doge-updown-5m-1776345900",
+      "filename": "doge-updown-5m-1776345900.csv",
+      "winner": "Up",
+      "epoch": 1776345900
+    },
+    {
+      "slug": "doge-updown-5m-1776345600",
+      "filename": "doge-updown-5m-1776345600.csv",
+      "winner": "Down",
+      "epoch": 1776345600
+    },
+    {
+      "slug": "doge-updown-5m-1776345300",
+      "filename": "doge-updown-5m-1776345300.csv",
+      "winner": "Up",
+      "epoch": 1776345300
+    },
+    {
+      "slug": "doge-updown-5m-1776345000",
+      "filename": "doge-updown-5m-1776345000.csv",
+      "winner": "Up",
+      "epoch": 1776345000
+    },
+    {
+      "slug": "doge-updown-5m-1776344700",
+      "filename": "doge-updown-5m-1776344700.csv",
+      "winner": "Up",
+      "epoch": 1776344700
+    },
+    {
+      "slug": "doge-updown-5m-1776344400",
+      "filename": "doge-updown-5m-1776344400.csv",
+      "winner": "Down",
+      "epoch": 1776344400
+    },
     {
       "slug": "doge-updown-5m-1776343800",
       "filename": "doge-updown-5m-1776343800.csv",
