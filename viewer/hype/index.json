@@ -1,8 +1,368 @@
 {
   "market": "hype",
-  "generated_at": "2026-04-15T21:40:01.618766+00:00",
-  "count": 120,
+  "generated_at": "2026-04-16T02:45:01.579228+00:00",
+  "count": 180,
   "windows": [
+    {
+      "slug": "hype-updown-5m-1776307200",
+      "filename": "hype-updown-5m-1776307200.csv",
+      "winner": "Up",
+      "epoch": 1776307200
+    },
+    {
+      "slug": "hype-updown-5m-1776306900",
+      "filename": "hype-updown-5m-1776306900.csv",
+      "winner": "Up",
+      "epoch": 1776306900
+    },
+    {
+      "slug": "hype-updown-5m-1776306600",
+      "filename": "hype-updown-5m-1776306600.csv",
+      "winner": "Down",
+      "epoch": 1776306600
+    },
+    {
+      "slug": "hype-updown-5m-1776306300",
+      "filename": "hype-updown-5m-1776306300.csv",
+      "winner": "Up",
+      "epoch": 1776306300
+    },
+    {
+      "slug": "hype-updown-5m-1776306000",
+      "filename": "hype-updown-5m-1776306000.csv",
+      "winner": "Up",
+      "epoch": 1776306000
+    },
+    {
+      "slug": "hype-updown-5m-1776305700",
+      "filename": "hype-updown-5m-1776305700.csv",
+      "winner": "Up",
+      "epoch": 1776305700
+    },
+    {
+      "slug": "hype-updown-5m-1776305400",
+      "filename": "hype-updown-5m-1776305400.csv",
+      "winner": "Up",
+      "epoch": 1776305400
+    },
+    {
+      "slug": "hype-updown-5m-1776305100",
+      "filename": "hype-updown-5m-1776305100.csv",
+      "winner": "Down",
+      "epoch": 1776305100
+    },
+    {
+      "slug": "hype-updown-5m-1776304800",
+      "filename": "hype-updown-5m-1776304800.csv",
+      "winner": "Up",
+      "epoch": 1776304800
+    },
+    {
+      "slug": "hype-updown-5m-1776304500",
+      "filename": "hype-updown-5m-1776304500.csv",
+      "winner": "Up",
+      "epoch": 1776304500
+    },
+    {
+      "slug": "hype-updown-5m-1776304200",
+      "filename": "hype-updown-5m-1776304200.csv",
+      "winner": "Down",
+      "epoch": 1776304200
+    },
+    {
+      "slug": "hype-updown-5m-1776303900",
+      "filename": "hype-updown-5m-1776303900.csv",
+      "winner": "Down",
+      "epoch": 1776303900
+    },
+    {
+      "slug": "hype-updown-5m-1776303600",
+      "filename": "hype-updown-5m-1776303600.csv",
+      "winner": "Up",
+      "epoch": 1776303600
+    },
+    {
+      "slug": "hype-updown-5m-1776303300",
+      "filename": "hype-updown-5m-1776303300.csv",
+      "winner": "Up",
+      "epoch": 1776303300
+    },
+    {
+      "slug": "hype-updown-5m-1776303000",
+      "filename": "hype-updown-5m-1776303000.csv",
+      "winner": "Down",
+      "epoch": 1776303000
+    },
+    {
+      "slug": "hype-updown-5m-1776302700",
+      "filename": "hype-updown-5m-1776302700.csv",
+      "winner": "Up",
+      "epoch": 1776302700
+    },
+    {
+      "slug": "hype-updown-5m-1776302400",
+      "filename": "hype-updown-5m-1776302400.csv",
+      "winner": "Down",
+      "epoch": 1776302400
+    },
+    {
+      "slug": "hype-updown-5m-1776302100",
+      "filename": "hype-updown-5m-1776302100.csv",
+      "winner": "Up",
+      "epoch": 1776302100
+    },
+    {
+      "slug": "hype-updown-5m-1776301800",
+      "filename": "hype-updown-5m-1776301800.csv",
+      "winner": "Down",
+      "epoch": 1776301800
+    },
+    {
+      "slug": "hype-updown-5m-1776301500",
+      "filename": "hype-updown-5m-1776301500.csv",
+      "winner": "Down",
+      "epoch": 1776301500
+    },
+    {
+      "slug": "hype-updown-5m-1776301200",
+      "filename": "hype-updown-5m-1776301200.csv",
+      "winner": "Down",
+      "epoch": 1776301200
+    },
+    {
+      "slug": "hype-updown-5m-1776300900",
+      "filename": "hype-updown-5m-1776300900.csv",
+      "winner": "Up",
+      "epoch": 1776300900
+    },
+    {
+      "slug": "hype-updown-5m-1776300600",
+      "filename": "hype-updown-5m-1776300600.csv",
+      "winner": "Up",
+      "epoch": 1776300600
+    },
+    {
+      "slug": "hype-updown-5m-1776300300",
+      "filename": "hype-updown-5m-1776300300.csv",
+      "winner": "Down",
+      "epoch": 1776300300
+    },
+    {
+      "slug": "hype-updown-5m-1776300000",
+      "filename": "hype-updown-5m-1776300000.csv",
+      "winner": "Down",
+      "epoch": 1776300000
+    },
+    {
+      "slug": "hype-updown-5m-1776299700",
+      "filename": "hype-updown-5m-1776299700.csv",
+      "winner": "Down",
+      "epoch": 1776299700
+    },
+    {
+      "slug": "hype-updown-5m-1776299400",
+      "filename": "hype-updown-5m-1776299400.csv",
+      "winner": "Up",
+      "epoch": 1776299400
+    },
+    {
+      "slug": "hype-updown-5m-1776299100",
+      "filename": "hype-updown-5m-1776299100.csv",
+      "winner": "Up",
+      "epoch": 1776299100
+    },
+    {
+      "slug": "hype-updown-5m-1776298800",
+      "filename": "hype-updown-5m-1776298800.csv",
+      "winner": "Down",
+      "epoch": 1776298800
+    },
+    {
+      "slug": "hype-updown-5m-1776298500",
+      "filename": "hype-updown-5m-1776298500.csv",
+      "winner": "Down",
+      "epoch": 1776298500
+    },
+    {
+      "slug": "hype-updown-5m-1776298200",
+      "filename": "hype-updown-5m-1776298200.csv",
+      "winner": "Up",
+      "epoch": 1776298200
+    },
+    {
+      "slug": "hype-updown-5m-1776297900",
+      "filename": "hype-updown-5m-1776297900.csv",
+      "winner": "Down",
+      "epoch": 1776297900
+    },
+    {
+      "slug": "hype-updown-5m-1776297600",
+      "filename": "hype-updown-5m-1776297600.csv",
+      "winner": "Down",
+      "epoch": 1776297600
+    },
+    {
+      "slug": "hype-updown-5m-1776297300",
+      "filename": "hype-updown-5m-1776297300.csv",
+      "winner": "Up",
+      "epoch": 1776297300
+    },
+    {
+      "slug": "hype-updown-5m-1776297000",
+      "filename": "hype-updown-5m-1776297000.csv",
+      "winner": "Up",
+      "epoch": 1776297000
+    },
+    {
+      "slug": "hype-updown-5m-1776296700",
+      "filename": "hype-updown-5m-1776296700.csv",
+      "winner": "Up",
+      "epoch": 1776296700
+    },
+    {
+      "slug": "hype-updown-5m-1776296400",
+      "filename": "hype-updown-5m-1776296400.csv",
+      "winner": "Up",
+      "epoch": 1776296400
+    },
+    {
+      "slug": "hype-updown-5m-1776296100",
+      "filename": "hype-updown-5m-1776296100.csv",
+      "winner": "Down",
+      "epoch": 1776296100
+    },
+    {
+      "slug": "hype-updown-5m-1776295800",
+      "filename": "hype-updown-5m-1776295800.csv",
+      "winner": "Down",
+      "epoch": 1776295800
+    },
+    {
+      "slug": "hype-updown-5m-1776295500",
+      "filename": "hype-updown-5m-1776295500.csv",
+      "winner": "Up",
+      "epoch": 1776295500
+    },
+    {
+      "slug": "hype-updown-5m-1776295200",
+      "filename": "hype-updown-5m-1776295200.csv",
+      "winner": "Up",
+      "epoch": 1776295200
+    },
+    {
+      "slug": "hype-updown-5m-1776294900",
+      "filename": "hype-updown-5m-1776294900.csv",
+      "winner": "Up",
+      "epoch": 1776294900
+    },
+    {
+      "slug": "hype-updown-5m-1776294600",
+      "filename": "hype-updown-5m-1776294600.csv",
+      "winner": "Up",
+      "epoch": 1776294600
+    },
+    {
+      "slug": "hype-updown-5m-1776294300",
+      "filename": "hype-updown-5m-1776294300.csv",
+      "winner": "Up",
+      "epoch": 1776294300
+    },
+    {
+      "slug": "hype-updown-5m-1776294000",
+      "filename": "hype-updown-5m-1776294000.csv",
+      "winner": "Down",
+      "epoch": 1776294000
+    },
+    {
+      "slug": "hype-updown-5m-1776293700",
+      "filename": "hype-updown-5m-1776293700.csv",
+      "winner": "Down",
+      "epoch": 1776293700
+    },
+    {
+      "slug": "hype-updown-5m-1776293400",
+      "filename": "hype-updown-5m-1776293400.csv",
+      "winner": "Down",
+      "epoch": 1776293400
+    },
+    {
+      "slug": "hype-updown-5m-1776293100",
+      "filename": "hype-updown-5m-1776293100.csv",
+      "winner": "Up",
+      "epoch": 1776293100
+    },
+    {
+      "slug": "hype-updown-5m-1776292800",
+      "filename": "hype-updown-5m-1776292800.csv",
+      "winner": "Down",
+      "epoch": 1776292800
+    },
+    {
+      "slug": "hype-updown-5m-1776292500",
+      "filename": "hype-updown-5m-1776292500.csv",
+      "winner": "Up",
+      "epoch": 1776292500
+    },
+    {
+      "slug": "hype-updown-5m-1776292200",
+      "filename": "hype-updown-5m-1776292200.csv",
+      "winner": "Up",
+      "epoch": 1776292200
+    },
+    {
+      "slug": "hype-updown-5m-1776291900",
+      "filename": "hype-updown-5m-1776291900.csv",
+      "winner": "Down",
+      "epoch": 1776291900
+    },
+    {
+      "slug": "hype-updown-5m-1776291600",
+      "filename": "hype-updown-5m-1776291600.csv",
+      "winner": "Up",
+      "epoch": 1776291600
+    },
+    {
+      "slug": "hype-updown-5m-1776291300",
+      "filename": "hype-updown-5m-1776291300.csv",
+      "winner": "Down",
+      "epoch": 1776291300
+    },
+    {
+      "slug": "hype-updown-5m-1776291000",
+      "filename": "hype-updown-5m-1776291000.csv",
+      "winner": "Down",
+      "epoch": 1776291000
+    },
+    {
+      "slug": "hype-updown-5m-1776290700",
+      "filename": "hype-updown-5m-1776290700.csv",
+      "winner": "Up",
+      "epoch": 1776290700
+    },
+    {
+      "slug": "hype-updown-5m-1776290400",
+      "filename": "hype-updown-5m-1776290400.csv",
+      "winner": "Up",
+      "epoch": 1776290400
+    },
+    {
+      "slug": "hype-updown-5m-1776290100",
+      "filename": "hype-updown-5m-1776290100.csv",
+      "winner": "Down",
+      "epoch": 1776290100
+    },
+    {
+      "slug": "hype-updown-5m-1776289800",
+      "filename": "hype-updown-5m-1776289800.csv",
+      "winner": "Up",
+      "epoch": 1776289800
+    },
+    {
+      "slug": "hype-updown-5m-1776289500",
+      "filename": "hype-updown-5m-1776289500.csv",
+      "winner": "Down",
+      "epoch": 1776289500
+    },
     {
       "slug": "hype-updown-5m-1776288900",
       "filename": "hype-updown-5m-1776288900.csv",
